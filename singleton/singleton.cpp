@@ -40,14 +40,12 @@ public:
 
 template<typename T>
 std::shared_ptr<Singleton<T>> Singleton<T>::mInstancePtr = nullptr;
-// Singleton<T> Singleton<T>::*mInstancePtr;
 
 template<typename T>
 Singleton<T> *Singleton<T>::raw_pointer;
 
 template<typename T>
 std::mutex Singleton<T>::mutex_;
-
 
 
 template<typename T>
@@ -62,7 +60,6 @@ std::shared_ptr<Singleton<T>>Singleton<T>::GetInstance(T const& value)
     std::lock_guard<std::mutex> lock(mutex_);
     if (mInstancePtr == nullptr) {
         mInstancePtr = std::make_shared<Singleton<T>>(value);
-        // mInstancePtr = new Singleton(value);
     }
     return mInstancePtr;
 }
