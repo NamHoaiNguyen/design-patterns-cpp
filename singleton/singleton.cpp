@@ -4,15 +4,6 @@
 #include <thread>
 
 template<typename T>
-class Singleton;
-
-template<typename T>
-std::shared_ptr<Singleton<T>>GetInstance(T const& value); 
-
-template<typename T>
-Singleton<T>* getTest(T const& value);
-
-template<typename T>
 class Singleton {
 private:
     static std::shared_ptr<Singleton<T>> mInstancePtr; 
@@ -30,10 +21,7 @@ public:
     // Singleton(T const& value);
     Singleton(Singleton &signleton) = delete;
     Singleton& operator=(const Singleton &singleton) = delete;
-
-    // static std::shared_ptr<Singleton<T>>GetInstance(T const& value);
     static std::shared_ptr<Singleton<T>>GetInstance(T const& value);
-
     static Singleton *GetInstanceRawPointer(T const& value);
     T getValue(); 
 };
@@ -46,7 +34,6 @@ Singleton<T> *Singleton<T>::raw_pointer;
 
 template<typename T>
 std::mutex Singleton<T>::mutex_;
-
 
 template<typename T>
 Singleton<T>::Singleton(T const& value) : value(value)
