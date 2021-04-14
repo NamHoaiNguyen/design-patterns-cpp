@@ -8,6 +8,11 @@
 #include <type_traits>
 #include <vector>
 
+enum eLocationType{
+    NEWYORK = 0,
+    OAKLAND,
+};
+
 template<typename T, std::size_t MAX_SIZE>
 class PizzaStore {
 // protected:
