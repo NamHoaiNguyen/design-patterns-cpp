@@ -1,12 +1,14 @@
 #include "../include/account_service.h"
-#include "../include/mailer.h"
+#include "../include/observer/mailer.h"
 
 #include <iostream>
 
 int main()
 {
-    AccountServer<Mailer> acc1;
-    AccountServer<Mailer> acc2;
-    acc1 = acc2;
+    std::string test = "test acc 1";
+    AccountServer<Mailer<std::string>> acc1();
+    AccountServer<Mailer<std::string>> acc2();
+    // acc1 = acc2;
+
     return 0;
 }

@@ -1,9 +1,14 @@
+#include "user.h"
+#include "observer/observer.h"
+
 #include <memory>
 
 template<typename T>
 class Subject {
 public:
-    virtual void attach() = 0;
-    virtual void detach() = 0;
-    virtual void notify() = 0;
+    virtual void Attach(T* observer) = 0;
+    virtual void Detach(T* observer) = 0;
+    virtual void Notify() = 0;
+
+    
 };

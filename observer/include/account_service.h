@@ -1,23 +1,27 @@
-#ifndef accountServer
-#define accountServer
+#ifndef observer_accountServer
+#define observer_accountServer
 
-#include "observer.h"
+#include "observer/observer.h"
 #include "subject.h"
+#include "user.h"
 
-#include<vector>
+#include <algorithm>    
+#include <iostream>
+#include <vector>
 
 template<typename T>
 class AccountServer : public Subject<T>
 {
 private:
-    // std::vector<T> observers;
-    // std::vector<std::shared_ptr<Observer<T>>> observers;
+    // std::vector<std::shared_ptr<T>> observers;
     std::vector<T*> observers;
+    User user;
+
 public:
     AccountServer();
-    virtual void attach() override;
-    virtual void detach() override;
-    virtual void notify() override;
+    virtual void Attach(T* observer) override;
+    virtual void Detach(T* observer) override;
+    virtual void Notify() override;
 
     AccountServer(const AccountServer<T> &accountServer);
     AccountServer &operator= (const AccountServer<T> &account);
@@ -49,21 +53,39 @@ AccountServer<T>& AccountServer<T>::operator=(const AccountServer<T> &account)
 }
 
 template<typename T>
-void AccountServer<T>::attach()
+void AccountServer<T>::Attach(T* observer)
 {
-
+    /*stf::find get error when deduce type*/
+    /*
+    if (std::find(observers.begin(), observers.end(), *observer) == observers.end()) {
+        observers.push_back(observer);
+    }
+    */
+    std::vector<Observer *> test;
+    Observer *abc;
+    std::vector<T *>::iterator it;
+    
+    if (std::find(observers.begin(), observers.end(), it) == test.end()) {
+        return;
+    }
+   
 }
 
 template<typename T>
-void AccountServer<T>::detach()
+void AccountServer<T>::Detach(T* observer)
 {
-
+    // if (std::find(observers.begin(), observers.end(), observer) != observers.end()) {
+    //     observers.erase(observer);
+    // }
+    std::cout << "Check ham detach " << std::endl;
 }
 
 template<typename T>
-void AccountServer<T>::notify()
+void AccountServer<T>::Notify()
 {
-
+    for (auto *elem : observers) {
+        elem.Update(user);
+    }
 }
 
 #endif
