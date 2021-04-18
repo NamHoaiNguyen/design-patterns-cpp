@@ -8,7 +8,5 @@ class Subject {
 public:
     virtual void Attach(T* observer) = 0;
     virtual void Detach(T* observer) = 0;
-    virtual void Notify() = 0;
-
-    
+    virtual void Notify() = 0;    
 };

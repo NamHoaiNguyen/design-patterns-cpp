@@ -1,5 +1,5 @@
-#ifndef observer_accountServer
-#define observer_accountServer
+#ifndef observer_AccountService
+#define observer_AccountService
 
 #include "observer/observer.h"
 #include "subject.h"
@@ -10,7 +10,7 @@
 #include <vector>
 
 template<typename T>
-class AccountServer : public Subject<T>
+class AccountService : public Subject<T>
 {
 private:
     // std::vector<std::shared_ptr<T>> observers;
@@ -18,23 +18,41 @@ private:
     User user;
 
 public:
-    AccountServer();
+    AccountService();
+    ~AccountService();
     virtual void Attach(T* observer) override;
     virtual void Detach(T* observer) override;
     virtual void Notify() override;
 
-    AccountServer(const AccountServer<T> &accountServer);
-    AccountServer &operator= (const AccountServer<T> &account);
+    void login();
+
+    AccountService(const AccountService<T> &account);
+    AccountService &operator= (const AccountService<T> &account);
 };
 
+
 template<typename T>
-AccountServer<T>::AccountServer() 
+AccountService<T>::AccountService() 
 {
 
 }
 
 template<typename T>
-AccountServer<T>& AccountServer<T>::operator=(const AccountServer<T> &account)
+AccountService<T>::~AccountService()
+{
+    for (auto &elem : observers) {
+        delete elem;
+    }
+}
+
+template<typename T>
+AccountService<T>::AccountService(const AccountService<T> &account)
+{
+    observers = account.observers;
+}
+
+template<typename T>
+AccountService<T>& AccountService<T>::operator=(const AccountService<T> &account)
 {
     if (this == &account) 
         return *this;
@@ -53,39 +71,41 @@ AccountServer<T>& AccountServer<T>::operator=(const AccountServer<T> &account)
 }
 
 template<typename T>
-void AccountServer<T>::Attach(T* observer)
+void AccountService<T>::Attach(T* observer)
 {
     /*stf::find get error when deduce type*/
     /*
-    if (std::find(observers.begin(), observers.end(), *observer) == observers.end()) {
+    if (std::find(observers.begin(), observers.end(), observer) == observers.end()) {
         observers.push_back(observer);
     }
     */
-    std::vector<Observer *> test;
-    Observer *abc;
-    std::vector<T *>::iterator it;
-    
-    if (std::find(observers.begin(), observers.end(), it) == test.end()) {
-        return;
-    }
-   
+   T* test;
+    std::cout << "Test attach method " << std::endl;
+    observers.push_back(test);
 }
 
 template<typename T>
-void AccountServer<T>::Detach(T* observer)
+void AccountService<T>::Detach(T* observer)
 {
     // if (std::find(observers.begin(), observers.end(), observer) != observers.end()) {
     //     observers.erase(observer);
     // }
-    std::cout << "Check ham detach " << std::endl;
+    std::cout << "Test detach method " << std::endl;
+    observers.erase();
 }
 
 template<typename T>
-void AccountServer<T>::Notify()
+void AccountService<T>::Notify()
 {
-    for (auto *elem : observers) {
-        elem.Update(user);
-    }
+    // for (auto &elem : observers) {
+    //     elem->Update(user);
+    // }
+}
+
+template<typename T>
+void AccountService<T>::login()
+{
+    Notify();
 }
 
 #endif
