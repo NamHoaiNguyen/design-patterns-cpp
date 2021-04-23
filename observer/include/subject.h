@@ -6,7 +6,7 @@
 template<typename T>
 class Subject {
 public:
-    virtual void Attach(T* observer) = 0;
-    virtual void Detach(T* observer) = 0;
+    virtual void Attach(std::shared_ptr<T> observer) = 0;
+    virtual void Detach(std::shared_ptr<T> observer) = 0;
     virtual void Notify() = 0;    
 };

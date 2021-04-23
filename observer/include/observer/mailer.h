@@ -4,11 +4,10 @@
 #include "observer.h"
 
 template<typename T>
-class Mailer : public Observer
+class Mailer : public Observer<T>
 {
 private:
-	int id;
-    T test;
+    T mailTest;
 
 public:
     Mailer(int id, T const& test);
@@ -16,25 +15,33 @@ public:
 
     template<typename S>
     friend bool operator== (const Mailer<S>& mail1, const Mailer<S>& mail2);
+    template<typename S, typename U>
+    friend bool operator== (const Mailer<S>& mail1, const Mailer<U>& mail2);
 };
 
 template<typename T>
-Mailer<T>::Mailer(int id, T const& test) : id{id}, test{test}
+Mailer<T>::Mailer(int id, T const& mailTest) : mailTest{mailTest}
 {
-
+    this->id = id;
 }
 
 template<typename S>
 bool operator== (const Mailer<S>& mail1, const Mailer<S>& mail2)
 {
-    return &mail1 == &mail2;
+    return mail1.id == mail2.id;
 }
 
+template<typename S, typename U>
+bool operator== (const Mailer<S>& mail1, const Mailer<U>& mail2)
+{
+    return false;
+}
 
 template<typename T>
 void Mailer<T>::Update()
 {
-    std::cout << "Check ham update ";
+    std::cout << "Check Id and mailTest " << "'" << this->id << " " << mailTest << "'" << std::endl; 
+    std::cout << "User will receive email when logging in " << std::endl;
     return;
 }
 
