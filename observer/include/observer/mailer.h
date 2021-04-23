@@ -7,10 +7,11 @@ template<typename T>
 class Mailer : public Observer
 {
 private:
+	int id;
     T test;
 
 public:
-    Mailer(T const& test);
+    Mailer(int id, T const& test);
     virtual void Update() override;
 
     template<typename S>
@@ -18,7 +19,7 @@ public:
 };
 
 template<typename T>
-Mailer<T>::Mailer(T const& test) : test{test}
+Mailer<T>::Mailer(int id, T const& test) : id{id}, test{test}
 {
 
 }

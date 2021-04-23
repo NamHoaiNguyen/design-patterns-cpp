@@ -3,6 +3,9 @@
 
 // template<typename T>    
 class Observer {
+protected:
+	int id;
+
 public:
     virtual void Update() = 0;
 

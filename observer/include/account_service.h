@@ -87,9 +87,9 @@ void AccountService<T>::Attach(T* observer)
 template<typename T>
 void AccountService<T>::Detach(T* observer)
 {
-    // if (std::find(observers.begin(), observers.end(), observer) != observers.end()) {
-    //     observers.erase(observer);
-    // }
+    if (std::find_if(observers.begin(), observers.end(), [&observer](const T* elem) -> bool{return elem->id;}) != observers.end()) {
+        observers.erase(observer);
+    }
     std::cout << "Test detach method " << std::endl;
     observers.erase();
 }
@@ -97,9 +97,9 @@ void AccountService<T>::Detach(T* observer)
 template<typename T>
 void AccountService<T>::Notify()
 {
-    // for (auto &elem : observers) {
-    //     elem->Update(user);
-    // }
+	for (auto &elem : observers) {
+		elem->Update(user);
+	}
 }
 
 template<typename T>
