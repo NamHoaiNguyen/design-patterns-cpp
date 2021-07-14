@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <mutex>
+#include <string>
 
 #include "AccountService.h"
 #include "EmailService.h"
@@ -15,7 +16,8 @@ template<typename Acc, typename Email, typename Payment, typename Shipping, type
 class ShopFacade {
 private:
     static std::mutex mutex_;
-    static std::shared_ptr<ShopFacade<Acc, Email, Payment, Shipping, Sms>> mInstancePtr;
+    // static std::shared_ptr<ShopFacade<Acc, Email, Payment, Shipping, Sms>> mInstancePtr;
+    static ShopFacade<Acc, Email, Payment, Shipping, Sms> *mInstancePtr;
     AccountService<Acc> accountService;
     EmailService<Email> emailService;
     PaymentService<Payment> paymentService;
@@ -23,14 +25,25 @@ private:
     SmsService<Sms> smsService;
 
     ShopFacade();
+    ~ShopFacade()
+    {
+        delete mInstancePtr;
+    }
 public:
     static decltype(auto) get_instance();
     decltype(auto) buyProductByCashWithFreeShipping(Email&& email);
     ShopFacade(const ShopFacade&) = delete;
     ShopFacade &operator=(const ShopFacade&) = delete;
-    ShopFacade(ShopFacade&&) = delete;
-    ShopFacade &operator=(ShopFacade&&) = delete;
+    // ShopFacade(ShopFacade&&) = delete;
+    // ShopFacade &operator=(ShopFacade&&) = delete;
 };
+
+template<typename Acc, typename Email, typename Payment, typename Shipping, typename Sms>
+ShopFacade<Acc, Email, Payment, Shipping, Sms>
+*ShopFacade<Acc, Email, Payment, Shipping, Sms>::mInstancePtr = nullptr;
+
+template<typename Acc, typename Email, typename Payment, typename Shipping, typename Sms>
+std::mutex ShopFacade<Acc, Email, Payment, Shipping, Sms>::mutex_;
 
 template<typename Acc, typename Email, typename Payment, typename Shipping, typename Sms>
 ShopFacade<Acc, Email, Payment, Shipping, Sms>::ShopFacade()
@@ -43,7 +56,9 @@ decltype(auto) ShopFacade<Acc, Email, Payment, Shipping, Sms>::get_instance()
 {
     std::lock_guard<std::mutex> lock(mutex_);
     if (mInstancePtr == nullptr) 
-        mInstancePtr = std::make_shared<ShopFacade<Acc, Email, Payment, Shipping, Sms>>();
+        // mInstancePtr = std::make_shared<ShopFacade<Acc, Email, Payment, Shipping, Sms>>
+        // (new ShopFacade<Acc, Email, Payment, Shipping, Sms>());
+        mInstancePtr = new ShopFacade<Acc, Email, Payment, Shipping, Sms>();
     return mInstancePtr;
 }
 
@@ -53,8 +68,10 @@ decltype(auto) ShopFacade<Acc, Email, Payment, Shipping, Sms>::buyProductByCashW
     accountService.get_account(std::forward<Email>(email));
     paymentService.payment_cash();
     shippingService.free_shipping();
-    emailService.send_email();
+    emailService.send_email(std::forward<Email>(email));
     std::cout << "Done " << std::endl; 
+
+    return 0;
 }
 
 #endif
