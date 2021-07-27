@@ -1,61 +1,62 @@
-#ifndef concrete_aggregate
-#define concrete_aggregate
+#ifndef concrete_aggregate_h
+#define concrete_aggregate_h
 
 #include <iostream>
 #include <memory>
 #include <type_traits>
 
 #include "aggregate.h"
+#include "concrete_iterator.h"
 
 template<typename T>
-using IsIntegral = std::enable_if_t<std::is_integral<T>::type>;
+using IsIntegral = std::enable_if_t<std::is_integral<T>::value>;
 
 template<typename T>
-class ConcreteAggregate : public Aggregate<T> 
+class ConcreteIterator;
+
+template<typename T>
+class ConcreteAggregate : public Aggregate<T>, public std::enable_shared_from_this<ConcreteAggregate<T>>
 {
 private:
     T size_;
-    // template<typename T_ = T, typename = IsIntegral>
-    // std::list<T_> list;
     std::shared_ptr<T> list_;
 
 public:
     ConcreteAggregate() = delete;
 
-    template<typename T_ = T, typename = IsIntegral<T>>
-    explicit ConcreteAggregate(T&& size) : size_(std::forward<T>(size)), list_(new T[size_]) 
+    template<typename T_ = T, typename = IsIntegral<T_>>
+    explicit ConcreteAggregate(T_&& size) : size_(std::forward<T_>(size)),
+                                           list_(std::make_shared<T_>(size_)) 
     {
 
     }
 
-    ~ConcreteAggregate() 
-    {
-
-    }
+    ~ConcreteAggregate() = default;
     
-    virtual int size() const override;
+    virtual int size() override;
 
-    virtual int at(unsigned int index) const override;
+    virtual int at(int index) override;
 
     virtual std::shared_ptr<Iterator<T>> create_iterator() override;
 };
 
 template<typename T>
-int ConcreteAggregate<T>::size() const 
+int ConcreteAggregate<T>::size() 
 {
-    size_ = 0;
+    return size_;
 }
 
 template<typename T>
-int ConcreteAggregate<T>::at(unsigned int index) const 
+int ConcreteAggregate<T>::at(int index) 
 {
-    return list_[index];
+    auto test = list_.get();
+    return list_.get()[index];
 }
 
 template<typename T>
 std::shared_ptr<Iterator<T>> ConcreteAggregate<T>::create_iterator()
 {
-    // return std::shared_ptr<A>
+    return std::make_shared<ConcreteIterator<T>>(this->shared_from_this()); 
 }
 
 #endif 

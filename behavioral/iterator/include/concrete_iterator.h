@@ -1,24 +1,31 @@
-#ifndef concrete_iterator
-#define concrete_iterator
+#ifndef concrete_iterator_h
+#define concrete_iterator_h
 
+#include "iterator.h"
 #include "concrete_aggregate.h"
 
 #include <type_traits>
 
 template<typename T>
 using IsPointer = 
-std::enable_if_t<std::is_pointer_v<T>>;
+std::enable_if_t<std::is_pointer<T>::value>;
 
+template<typename T>
+class ConcreteAggregate;
 
 template<typename T>
 class ConcreteIterator : public Iterator<T> {
 private:
     std::shared_ptr<ConcreteAggregate<T>> conAggr_l;
-    unsigned int index;
+    int index;
 
 public:
-    template<typename = IsPointer<T>>
-    explicit ConcreteIterator(std::shared_ptr<ConcreteAggregate<T>> conAggr) : conAggr_l(conAggr), index(0)
+    ConcreteIterator() 
+    {
+
+    }
+    // template<typename = IsPointer<T>>
+    explicit ConcreteIterator(std::shared_ptr<ConcreteAggregate<T>> conAggr) : conAggr_l(conAggr)
     {
 
     }
@@ -31,14 +38,13 @@ public:
 
     virtual bool isDone() const override;
 
-    virtual void currentItem() const override;
+    virtual int currentItem() const override;
 };
 
 template<typename T>
 void ConcreteIterator<T>::first()
 {
     index = 0;
-    // return index;
 }
 
 template<typename T>
@@ -48,9 +54,9 @@ void ConcreteIterator<T>::next()
 }
 
 template<typename T>
-void ConcreteIterator<T>::currentItem() const
+int ConcreteIterator<T>::currentItem() const
 {
-    if (isDone())   return;
+    if (isDone())   return -1;
 
     return conAggr_l->at(index);
 }

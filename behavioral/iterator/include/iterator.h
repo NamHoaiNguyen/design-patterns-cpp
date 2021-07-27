@@ -1,17 +1,20 @@
-#ifndef iterator 
-#define iterator 
+#ifndef iterator_h
+#define iterator_h
 
 template<typename T>
 class Iterator {
 private:
 
 public:
-    Iterator() = default;
+    virtual ~Iterator() { }
 
     virtual void first() = 0;
+
     virtual void next() = 0;
+
     virtual bool isDone() const = 0;
-    virtual void currentItem() const = 0;
+    
+    virtual int currentItem() const = 0;
 };
 
 #endif

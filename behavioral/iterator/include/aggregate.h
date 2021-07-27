@@ -1,5 +1,5 @@
-#ifndef aggregate
-#define aggregate
+#ifndef aggregate_h
+#define aggregate_h
 
 #include "iterator.h"
 
@@ -9,11 +9,11 @@
 template <typename T>
 class Aggregate {
 public:
-    Aggregate() = default;
+    ~Aggregate() { }
         
-    virtual int size() const = 0;
+    virtual int size()  = 0;
 
-    virtual int at(unsigned int index) const = 0;
+    virtual int at(int index) = 0;
 
     virtual std::shared_ptr<Iterator<T>> create_iterator() = 0;
 };
