@@ -14,7 +14,7 @@ public:
 
     virtual bool isDone() const = 0;
     
-    virtual int currentItem() const = 0;
+    virtual T currentItem() const = 0;
 };
 
 #endif

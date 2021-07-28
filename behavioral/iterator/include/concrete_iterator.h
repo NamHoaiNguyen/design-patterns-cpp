@@ -38,7 +38,7 @@ public:
 
     virtual bool isDone() const override;
 
-    virtual int currentItem() const override;
+    virtual T currentItem() const override;
 };
 
 template<typename T>
@@ -54,7 +54,7 @@ void ConcreteIterator<T>::next()
 }
 
 template<typename T>
-int ConcreteIterator<T>::currentItem() const
+T ConcreteIterator<T>::currentItem() const
 {
     if (isDone())   return -1;
 
