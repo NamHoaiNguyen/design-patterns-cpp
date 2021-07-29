@@ -27,7 +27,7 @@ public:
     template<typename T_ = T, typename = IsIntegral<T_>>
     explicit ConcreteAggregate(T_&& size) : size_(std::forward<T_>(size)),
                                         //    list_(std::make_shared<T_>(size_))
-                                           list_(new T_[size_])
+                                           list_(new T[size_])
     {
 
     }
