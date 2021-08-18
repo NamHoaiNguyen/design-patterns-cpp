@@ -16,6 +16,8 @@ public:
 
     ConcretePrototypeA(T&& os, T&& office, T&& browser);
 
+    ConcretePrototypeA(const ConcretePrototypeA& A);
+
     virtual std::shared_ptr<Prototype<T>> clone() override;
 
     virtual void print_string(std::ostream& out) const override;
@@ -29,6 +31,13 @@ ConcretePrototypeA<T>::ConcretePrototypeA(T&& os, T&& office, T&& browser) : os_
 
 }
 
+template<typename T>
+ConcretePrototypeA<T>::ConcretePrototypeA(const ConcretePrototypeA &A)
+{
+    os_ = A.os_;
+    office_ = A.office_;
+    browser_ = A.browser_;
+}
 
 template<typename T>
 void ConcretePrototypeA<T>::print_string(std::ostream& out) const
