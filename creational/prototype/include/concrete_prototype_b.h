@@ -21,14 +21,7 @@ public:
 
     virtual std::shared_ptr<Prototype<T>> clone() override;
 
-    virtual void print_string() override;
-
-    friend std::ostream& operator<< (std::ostream& out, const ConcretePrototypeB<T>& B)
-    {
-        out << "Prototype[os = " << B.os_ << ", office " << B.office_ << ", browser " << B.browser_ << "]" << std::endl;
-
-        return out;
-    }
+    virtual void print_string(std::ostream& out) const override;
 };
 
 template<typename T>
@@ -40,23 +33,15 @@ ConcretePrototypeB<T>::ConcretePrototypeB(T&& os, T&& office, T&& browser) : os_
 }
 
 template<typename T>
-std::shared_ptr<Prototype<T>> ConcretePrototypeB<T>::clone()
+void ConcretePrototypeB<T>::print_string(std::ostream& out) const
 {
-    return std::make_shared<ConcretePrototypeA<T>>();
+    out << "Prototype[os = " << os_ << ", office " << office_ << ", browser " << browser_ << "]" << std::endl;
 }
 
 template<typename T>
-void ConcretePrototypeB<T>::print_string()
+std::shared_ptr<Prototype<T>> ConcretePrototypeB<T>::clone()
 {
-    std::cout << "Prototype[os = " << os_ << ", office " << office_ << ", browser " << browser_ << "]" << std::endl;
+    return std::make_shared<ConcretePrototypeB<T>>();
 }
-
-// template<typename T>
-// std::ostream& operator<< (std::ostream& out, const ConcretePrototypeB<T>& B)
-// {
-//     out << "Prototype[os = " << B.os_ << ", office " << B.office_ << ", browser " << B.browser_ << "]" << std::endl;
-
-//     return out;
-// }
 
 #endif

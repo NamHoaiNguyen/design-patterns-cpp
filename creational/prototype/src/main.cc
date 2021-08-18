@@ -8,13 +8,10 @@
 
 int main()
 {
-    std::shared_ptr<Prototype<std::string>> proto = std::make_shared<ConcretePrototypeA<std::string>>("Linux", "Word", "Chrome");
-    std::shared_ptr<Prototype<std::string>> proto_1 = proto->clone();
+    auto proto = std::make_shared<ConcretePrototypeA<std::string>>("Linux", "Word", "Chrome");
+    auto proto_1 = proto->clone();
 
-    // proto->print_string();
-    // proto_1->print_string();
+    std::cout << *proto_1.get() << std::endl;
 
-    std::cout << proto << std::endl;
-    
     return 0;
 }
