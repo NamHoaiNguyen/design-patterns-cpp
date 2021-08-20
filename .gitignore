@@ -12,6 +12,13 @@
 *.exe
 *.out
 *.app
+iterator
+observer
+singleton
+factory
+prototype
+adapter
+facade
 
 # VS directory
 .vs/
