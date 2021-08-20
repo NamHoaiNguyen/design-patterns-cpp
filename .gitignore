@@ -1,1 +1,37 @@
+#Compiled object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Fortran module files
+*.mod
+*.smod
+
+# Executables
+*.exe
+*.out
+*.app
+
+# VS directory
+.vs/
+
+# CMake
+CMakeLists.txt.user*
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+#Json
 *.json
+
+build/behavioral/*
+build/creational/*
+build/structural/*

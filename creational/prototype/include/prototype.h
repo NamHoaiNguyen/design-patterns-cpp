@@ -11,8 +11,6 @@ public:
 
     virtual void print_string(std::ostream& out) const = 0;
 
-    // virtual void print_string() = 0;
-
     friend std::ostream& operator<< (std::ostream& out, const Prototype& A)
     {
         A.print_string(out);
