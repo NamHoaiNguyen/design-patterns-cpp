@@ -14,7 +14,7 @@
 *.app
 iterator
 observer
-singleton
+#singleton
 factory
 prototype
 adapter
