@@ -12,13 +12,35 @@
 *.exe
 *.out
 *.app
-iterator
-observer
+
+#creational patterns
 #singleton
-factory
-prototype
-adapter
-facade
+# factory
+# prototype
+# builder
+
+# #structural patterns
+# adapter
+# bridge 
+# composite
+# decorator
+# facade
+# flyweight
+# proxy
+
+# #behavioral patterns
+# chain
+# command
+# interpreter
+# iterator
+# mediator
+# memento
+# observer
+# state
+# strategy
+# template
+# visitor
+
 
 # VS directory
 .vs/

@@ -11,4 +11,4 @@ add_subdirectory(creational)
 
 add_subdirectory(structural)
 
-# add_executable(factory creational/factory/Factory_Method/main.cpp)
+
