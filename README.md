@@ -6,8 +6,9 @@ This repo contains some C++ examples for classic design patterns.
 
 #How to run
 
-Create "build" directory and run these commands:
+Run these commands:
 ```
+mkdir build
 cd build
 cmake ..
 make
