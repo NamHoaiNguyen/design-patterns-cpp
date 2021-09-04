@@ -10,35 +10,33 @@
 #include <memory>
 
 template<typename T>
-class FunitureFactory
+class FurnitureFactory
 {
 private:
-    FunitureFactory() = default;
+    FurnitureFactory() = default;
 
 public:
-    ~FunitureFactory () = default;
+    ~FurnitureFactory () = default;
 
-    static decltype(auto) getFactory(Material material);
+    static std::unique_ptr<FurnitureAbstract<T>> getFactory(Material material);
 };
 
+
+/*NOTE: CAN'T USE DECLTYPE(AUTO) IF FUNCTION HAVE DIFFENT RETURN VALUES(EXAMPLE:EACH CASE IN SWITCH COMMAND RETURN OTHER TYPES)*/
 template<typename T>
-decltype(auto) FunitureFactory<T>::getFactory(Material material)
+std::unique_ptr<FurnitureAbstract<T>> FurnitureFactory<T>::getFactory(Material material)
 {
-    switch(material) {
+    switch(material) 
+    {
         case Material::PLASTIC:
             std::cout << "Test plastic factory" << std::endl;
-
-            // template<typename U>
-            return std::make_unique<PlasticFactory<T>>();
+            return std::make_unique<WoodFactory<T>>();
         case Material::WOOD:
             std::cout << "Test wood factory" << std::endl;
-
-            // template<typename U>
-            return std::make_unique<PlasticFactory<T>>();
+            return std::make_unique<WoodFactory<T>>();
         default:
             throw std::invalid_argument("Received wrong argument");
     }
 }
-
 
 #endif

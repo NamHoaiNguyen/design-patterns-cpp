@@ -18,5 +18,4 @@ void PlasticChair<T>::create()
     std::cout << "Create plastic chair" << std::endl;
 }
 
-
 #endif

@@ -8,12 +8,10 @@
 #include <memory>
 
 template<typename T>
-class WoodFactory : public FurnitureAbstract<T>
+class WoodFactory : public FurnitureAbstract<T> 
 {
-private:
-
 public:
-    ~WoodFactory() = default;
+    WoodFactory() = default;
 
     std::unique_ptr<Chair<T>> create_chair() override;
 

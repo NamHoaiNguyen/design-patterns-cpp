@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-template <typename T>
+template<typename T>
 class WoodTable : public Table<T>
 {
 public:
