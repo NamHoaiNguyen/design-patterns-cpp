@@ -6,6 +6,6 @@ class Chair
 {
 public:
     virtual void create() = 0;
-}
+};
 
 #endif

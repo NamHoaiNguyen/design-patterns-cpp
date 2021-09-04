@@ -1,14 +1,20 @@
 #ifndef INCLUDE_ABSTRACT_H
 #define INCLUDE_ABSTRACT_H
 
+#include "chair.h"
+#include "table.h"
+
+#include <memory>
+
 template<typename T>
-class FunitureAbstract 
+class FurnitureAbstract 
 {
 public:
-    ~FunitureAbstract () = default;
+    ~FurnitureAbstract () = default;
 
-    virtual void createChar() = 0;
-    virtual void createTable() = 0;
+    virtual std::unique_ptr<Chair<T>> create_chair() = 0;
+    
+    virtual std::unique_ptr<Table<T>> create_table() = 0;
 };
 
 #endif
