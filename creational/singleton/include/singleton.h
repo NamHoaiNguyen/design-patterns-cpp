@@ -76,14 +76,3 @@ void createString(std::string const& str)
     std::cout << test->getValue() << std::endl;
 
 }
-
-int main()
-{
-    /*If Two strings are the same, it is okay*/
-    std::thread test1(createString, "String to test");
-    std::thread test2(createString, "Must be the same");
-    test1.join();
-    test2.join();
- 
-    return 0;
-}

@@ -8,4 +8,4 @@ add_executable(factory Factory_Method/main.cc)
 
 add_executable(prototype prototype/src/main.cc)
 
-add_executable(singleton singleton/main.cc)
+add_executable(singleton singleton/src/main.cc)
