@@ -1,5 +1,8 @@
-#include <cstring>
-#include <iostream> 
+#ifndef INCLUDE_SINGLETON_H
+#define INCLUDE_SINGLETON_H
+
+#include <iostream>
+#include <memory>
 #include <mutex>
 #include <thread>
 
@@ -76,3 +79,5 @@ void createString(std::string const& str)
     std::cout << test->getValue() << std::endl;
 
 }
+
+#endif
