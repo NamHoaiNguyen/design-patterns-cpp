@@ -23,6 +23,7 @@ public:
 
 
 /*NOTE: CAN'T USE DECLTYPE(AUTO) IF FUNCTION HAVE DIFFENT RETURN VALUES(EXAMPLE:EACH CASE IN SWITCH COMMAND RETURN OTHER TYPES)*/
+/*HOW TO FIX: RETURN TYPE IS POINTER INTERFACE(POLYRMORPHISM)*/
 template<typename T>
 std::unique_ptr<FurnitureAbstract<T>> FurnitureFactory<T>::getFactory(Material material)
 {
@@ -30,7 +31,7 @@ std::unique_ptr<FurnitureAbstract<T>> FurnitureFactory<T>::getFactory(Material m
     {
         case Material::PLASTIC:
             std::cout << "Test plastic factory" << std::endl;
-            return std::make_unique<WoodFactory<T>>();
+            return std::make_unique<PlasticFactory<T>>();
         case Material::WOOD:
             std::cout << "Test wood factory" << std::endl;
             return std::make_unique<WoodFactory<T>>();
