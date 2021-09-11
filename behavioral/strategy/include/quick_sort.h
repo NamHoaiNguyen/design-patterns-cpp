@@ -32,5 +32,4 @@ void QuickSort<std::string>::sort() {
     std::cout << "Quick sort in template specialization" << std::endl;
 }
 
-
 #endif
