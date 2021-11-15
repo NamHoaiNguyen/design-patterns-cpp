@@ -1,5 +1,5 @@
 #include "user.h"
-#include "observer/observer.h"
+#include "observer.h"
 
 #include <memory>
 

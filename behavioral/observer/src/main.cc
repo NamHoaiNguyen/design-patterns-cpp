@@ -1,6 +1,6 @@
 #include "../include/account_service.h"
-#include "../include/observer/mailer.h"
-#include "../include/observer/message.h"
+#include "../include/mailer.h"
+#include "../include/message.h"
 
 #include <iostream>
 #include <memory>

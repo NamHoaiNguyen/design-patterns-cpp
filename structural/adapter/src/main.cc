@@ -1,6 +1,6 @@
-#include "../include/adaptee.h"
-#include "../include/adapter.h"
-#include "../include/target.h"
+#include "adaptee.h"
+#include "adapter.h"
+#include "target.h"
 
 #include <memory>
 #include <string>

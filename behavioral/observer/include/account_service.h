@@ -1,7 +1,7 @@
 #ifndef observer_AccountService
 #define observer_AccountService
 
-#include "observer/observer.h"
+#include "observer.h"
 #include "subject.h"
 #include "user.h"
 

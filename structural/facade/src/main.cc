@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "../include/ShopFacade.h"
+#include "ShopFacade.h"
 
 int main()
 {

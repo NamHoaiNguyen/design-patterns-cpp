@@ -1,6 +1,6 @@
-#include "../include/prototype.h"
-#include "../include/concrete_prototype_a.h"
-#include "../include/concrete_prototype_b.h"
+#include "prototype.h"
+#include "concrete_prototype_a.h"
+#include "concrete_prototype_b.h"
 
 #include <iostream>
 #include <memory>

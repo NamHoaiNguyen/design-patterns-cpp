@@ -1,4 +1,4 @@
-#include "../include/singleton.h"
+#include "singleton.h"
 
 #include <cstring>
 #include <iostream> 

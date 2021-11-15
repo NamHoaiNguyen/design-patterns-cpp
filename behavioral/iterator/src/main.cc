@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "../include/iterator.h"
-#include "../include/aggregate.h"
-#include "../include/concrete_aggregate.h"
-#include "../include/concrete_iterator.h"
+#include "iterator.h"
+#include "aggregate.h"
+#include "concrete_aggregate.h"
+#include "concrete_iterator.h"
 
 int main()
 {

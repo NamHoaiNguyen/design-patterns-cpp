@@ -1,6 +1,6 @@
-#include "../include/furniture_abstract.h"
-#include "../include/furnitute_factory.h"
-#include "../include/material.h"
+#include "furniture_abstract.h"
+#include "furnitute_factory.h"
+#include "material.h"
 
 #include <iostream>
 #include <memory>

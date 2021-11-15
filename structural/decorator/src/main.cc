@@ -1,8 +1,8 @@
-#include "../include/employee_component.h"
-#include "../include/employee_concrete_component.h"
-#include "../include/manager.h"
-#include "../include/team_leader.h"
-#include "../include/team_member.h"
+#include "employee_component.h"
+#include "employee_concrete_component.h"
+#include "manager.h"
+#include "team_leader.h"
+#include "team_member.h"
 
 #include <iostream>
 #include <memory>
