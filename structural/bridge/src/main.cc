@@ -11,13 +11,13 @@
 
 int main()
 {
-    auto checking_acc = std::make_unique<CheckingAccount<std::string>>();
-    auto abcbank_ = std::make_unique<ABCbank<std::string>>(checking_acc);
+    std::unique_ptr<Account<std::string>> checking_acc = std::make_unique<CheckingAccount<std::string>>();
+    std::unique_ptr<Bank<std::string>> abcbank_ = std::make_unique<ABCbank<std::string>>(checking_acc);
     abcbank_->openAccount();
 
-    auto saving_acc = std::make_unique<CheckingAccount<std::string>>();
-    auto xyzbank_ = std::make_unique<XYZbank<std::string>>(checking_acc);
-
+    std::unique_ptr<Account<std::string>> saving_acc = std::make_unique<CheckingAccount<std::string>>();
+    std::unique_ptr<Bank<std::string>> xyzbank_ = std::make_unique<XYZbank<std::string>>(saving_acc);
+    xyzbank_->openAccount();
 
     return 0;
 }

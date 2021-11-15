@@ -4,9 +4,9 @@ add_executable(adapter adapter/src/main.cc)
 
 target_include_directories(adapter PRIVATE ${structural_include_dir}/adapter/include)
 
-# add_executable(bridge bridge/src/main.cc)
+add_executable(bridge bridge/src/main.cc)
 
-# target_include_directories(bridge PRIVATE ${structural_include_dir}/bridge/include)
+target_include_directories(bridge PRIVATE ${structural_include_dir}/bridge/include)
 
 add_executable(composite composite/src/main.cc)
 

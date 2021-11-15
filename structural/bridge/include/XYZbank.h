@@ -1,28 +1,32 @@
 #ifndef INCLUDE_XYZBANK_H
 #define INCLUDE_XYZBANK_H
 
-#include <memory>
+#include "Account.h"
+
+#include<iostream>
+#include<memory>
 
 template<typename T>
-class XYZbank {
+class XYZbank : public Bank<T> {
     private:
-        Account account_;
+        std::unique_ptr<Account<T>> account_;
 
     public:
-        Bank() = delete;
+        XYZbank() = delete;
 
-        explicit Bank(std::unique_ptr<Account<T>> &account) : account_((account)) {
+        explicit XYZbank(std::unique_ptr<Account<T>>& account) : account_(std::move(account)) {
 
         }
         
-        ~Bank() = default;
+        ~XYZbank() = default;
 
         void openAccount() override;
 };
 
 template<typename T>
 void XYZbank<T>::openAccount() {
-     std::cout << "XYZ bank" << std::end;   
+    std::cout << "Account banking in XYZ is ";
+    account_->openAccount();   
 }
 
 #endif

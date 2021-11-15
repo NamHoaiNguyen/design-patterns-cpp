@@ -1,8 +1,10 @@
 #ifndef INCLUDE_SAVING_ACCOUNT_H
 #define INCLUDE_SAVING_ACCOUNT_H
 
+#include<iostream>
+
 template<typename T>
-class SavingAccount {
+class SavingAccount : public Account<T> {
     private:
 
     public:
@@ -15,7 +17,7 @@ class SavingAccount {
 
 template<typename T>
 void SavingAccount<T>::openAccount() {
-    std::cout << "Saving account" << std::endl;
+    std::cout << "saving account" << std::endl;
 }
 
 #endif

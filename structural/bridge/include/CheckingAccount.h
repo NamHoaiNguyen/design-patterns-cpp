@@ -1,8 +1,10 @@
 #ifndef INCLUDE_CHECKING_ACCOUNT_H
 #define INCLUDE_CHECKING_ACCOUNT_H
 
+#include<iostream>
+
 template<typename T>
-class CheckingAccount {
+class CheckingAccount : public Account<T> {
     private:
 
     public:
@@ -15,7 +17,7 @@ class CheckingAccount {
 
 template<typename T>
 void CheckingAccount<T>::openAccount() {
-    std::cout << "Checking account" << std::endl;
+    std::cout << "checking account" << std::endl;
 }
 
 #endif
