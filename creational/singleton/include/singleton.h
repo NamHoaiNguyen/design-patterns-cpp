@@ -2,6 +2,7 @@
 #define INCLUDE_SINGLETON_H
 
 #include <iostream>
+#include <optional>
 #include <memory>
 #include <mutex>
 #include <thread>
@@ -58,6 +59,7 @@ std::shared_ptr<Singleton<T>>Singleton<T>::GetInstance(T const& value)
 template<typename T>
 Singleton<T>* Singleton<T>::GetInstanceRawPointer(T const& value) 
 {
+    /*should use double checked locking*/
     std::lock_guard<std::mutex> lock(mutex_);
     if (raw_pointer == nullptr) {
         raw_pointer = new Singleton<T>(value);
@@ -70,13 +72,43 @@ T Singleton<T>::getValue() {
     return value;
 }
 
+class NewSingleton {
+    public:
+        static NewSingleton* getInstance(const std::string& str);
+
+
+    private:
+        NewSingleton() = default;
+
+        NewSingleton(const std::string& str) {
+            std::cout << str << std::endl;
+        }
+
+        // std::string getValue() {
+        //     return 
+        // }
+
+        static std::optional<NewSingleton> m_instance;
+        static std::once_flag m_flag;
+};
+
+std::optional<NewSingleton> NewSingleton::m_instance;
+std::once_flag NewSingleton::m_flag{};
+
+NewSingleton* NewSingleton::getInstance(const std::string& str) {
+    std::call_once(NewSingleton::m_flag,
+                    [&str](){ m_instance.emplace(NewSingleton{str}); });
+    return &*m_instance;
+}
+
 void createString(std::string const& str)
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    auto test = Singleton<std::string>::GetInstanceRawPointer(str);
+    // auto test = Singleton<std::string>::GetInstanceRawPointer(str);
     // auto singleton = Singleton<std::string>::GetInstance(str);
+    auto test = NewSingleton::getInstance(str);
     // std::cout << singleton->getValue() << std::endl;
-    std::cout << test->getValue() << std::endl;
+    // std::cout << test->getValue() << std::endl;
 
 }
 

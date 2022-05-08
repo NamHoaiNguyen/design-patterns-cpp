@@ -1,25 +1,61 @@
+cmake_minimum_required (VERSION 3.18)
+
+set(CMAKE_CXX_STANDARD 17)
+
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-pthread")
 
-set (creational_include_dir "/home/hoainam/self-learn/design-patterns-cpp/creational")
+set (singleton_include_dir singleton/include)
 
-# include_directories("${CMAKE_SOURCE_DIR}/include")
+set (singleton_source 
+    singleton/src/main.cc
+)
 
-add_executable(abstract Abstract_Factory/src/main.cc)
+set (SOURCES ${singleton_include_dir} ${singleton_source})
 
-target_include_directories(abstract PRIVATE ${creational_include_dir}/Abstract_Factory/include)
+set (abstract_factory_include_dir 
+    Abstract_Factory/include
+)
 
-add_executable(builder builder/src/main.cc)
+set (abstract_factory_source 
+    Abstract_Factory/src/main.cc
+)
 
-target_include_directories(builder PRIVATE ${creational_include_dir}/builder/include)
+set (builder_include_dir)
 
-add_executable(factory Factory_Method/main.cc)
+set (builder_source 
+    builder/src/main.cc
+)
 
-target_include_directories(factory PRIVATE ${creational_include_dir}/Factory_Method/include)
+set (factory_include_dir 
+    Factory_Method/factory/include/factory_method.h
+    Factory_Method/pizza_store/newyork/ny_store.h
+    Factory_Method/pizza_store/oakland/oakland_store.h
+    Factory_Method/pizza_store/pizza.h
+)
 
-add_executable(prototype prototype/src/main.cc)
+set (factory_source Factory_Method/main.cc)
 
-target_include_directories(prototype PRIVATE ${creational_include_dir}/prototype/include)
+set (prototype_include_dir prototype/include)
 
-add_executable(singleton singleton/src/main.cc)
+set (prototype_source prototype/src/main.cc)
 
-target_include_directories(singleton PRIVATE ${creational_include_dir}/singleton/include)
+add_executable(singleton ${singleton_source})
+target_include_directories(singleton PUBLIC ${singleton_include_dir})
+
+
+add_executable(abstract_factory ${abstract_factory_source})
+target_include_directories(abstract_factory PUBLIC ${abstract_factory_include_dir})
+
+
+add_executable(builder 
+    ${builder_source} 
+    ${builder_include_dir}
+)
+
+add_executable(factory ${factory_source})
+target_include_directories(factory PUBLIC ${factory_include_dir})
+
+add_executable(prototype ${prototype_source})
+target_include_directories(prototype PUBLIC ${prototype_include_dir})
+
+
